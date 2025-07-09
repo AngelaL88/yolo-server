@@ -1,7 +1,6 @@
 from modal import (
     App,
     Image,
-    Mount,
     wsgi_app,
 )
 
@@ -18,13 +17,20 @@ image = (
         "torch==2.5.0",
         "pandas==2.2.3",
         "requests==2.32.3",
-        "ultralytics==8.2.48"
     )
+    .pip_install(
+        # "ultralytics==8.2.48"
+        "ultralytics"
+    )
+    .pip_install(
+        "seaborn"
+    )
+    .add_local_python_source("yolo_backend")
 )
 
 app = App("yolo-server")
 
-@app.function(image=image, mounts=[Mount.from_local_python_packages("yolo_backend")])
+@app.function(image=image)
 @wsgi_app()
 def flask_app():
     import time
