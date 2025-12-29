@@ -25,6 +25,9 @@ image = (
     .pip_install(
         "seaborn"
     )
+    .pip_install(
+        "tqdm"
+    )
     .add_local_python_source("yolo_backend")
 )
 
